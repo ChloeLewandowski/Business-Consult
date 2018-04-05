@@ -5,9 +5,12 @@
  */
 package facade;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import model.Phase;
 
 /**
@@ -28,5 +31,19 @@ public class PhaseFacade extends AbstractFacade<Phase> {
     public PhaseFacade() {
         super(Phase.class);
     }
-    
+
+    //retourne une liste de phases associées à un code projet passé en paramêtre
+    public List retournerPhasesProjet(Integer idProjet) {
+        try {
+
+            Query query = em.createQuery("SELECT p FROM Phase AS p WHERE p.unProjet.idProjet= :id").setParameter("id", idProjet);
+            List<Phase> listPhase = query.getResultList();
+
+            return listPhase;
+
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
 }

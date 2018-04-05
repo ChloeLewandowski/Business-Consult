@@ -5,12 +5,14 @@
  */
 package model;
 
+import java.util.Collection;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -31,6 +33,8 @@ public class Consultant implements java.io.Serializable {
     private String adresseConsultant;
     private String cpConsultant;
     private String villeConsultant;
+    @OneToMany(mappedBy="unConsultant")
+    private Collection<Phase> desPhases;
     
     public Consultant(){
         
@@ -93,6 +97,15 @@ public class Consultant implements java.io.Serializable {
     public void setVilleConsultant(String villeConsultant) {
         this.villeConsultant = villeConsultant;
     }
+
+    public Collection<Phase> getDesPhases() {
+        return desPhases;
+    }
+
+    public void setDesPhases(Collection<Phase> desPhases) {
+        this.desPhases = desPhases;
+    }
+    
     
     
     

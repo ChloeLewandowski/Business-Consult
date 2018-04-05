@@ -5,13 +5,20 @@
  */
 package model;
 
-import java.time.LocalDate;
+
+
+
+import java.sql.Date;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -29,8 +36,15 @@ public class Phase implements java.io.Serializable {
     private Integer codePhase;
     private String LibellePhase;
     private String DescriptionPhase;
-    private LocalDate dateDebutPhase;
-    private LocalDate dateFinPhase;
+    private Date dateDebutPhase;
+    private Date dateFinPhase;
+    @JoinColumn(name="idProjet")
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Projet unProjet;
+    @JoinColumn(name="idConsultant")
+    @ManyToOne(fetch=FetchType.LAZY)
+    private Consultant unConsultant;
+   
     
     public Phase(){
         
@@ -60,21 +74,43 @@ public class Phase implements java.io.Serializable {
         this.DescriptionPhase = DescriptionPhase;
     }
 
-    public LocalDate getDateDebutPhase() {
+    public Date getDateDebutPhase() {
         return dateDebutPhase;
     }
 
-    public void setDateDebutPhase(LocalDate dateDebutPhase) {
+    public void setDateDebutPhase(Date dateDebutPhase) {
         this.dateDebutPhase = dateDebutPhase;
     }
 
-    public LocalDate getDateFinPhase() {
+    public Date getDateFinPhase() {
         return dateFinPhase;
     }
 
-    public void setDateFinPhase(LocalDate dateFinPhase) {
+    public void setDateFinPhase(Date dateFinPhase) {
         this.dateFinPhase = dateFinPhase;
     }
+
+    public Projet getUnProjet() {
+        return unProjet;
+    }
+
+    public void setUnProjet(Projet unProjet) {
+        this.unProjet = unProjet;
+    }
+
+    public Consultant getUnConsultant() {
+        return unConsultant;
+    }
+
+    public void setUnConsultant(Consultant unConsultant) {
+        this.unConsultant = unConsultant;
+    }
+    
+    
+    
+
+ 
+    
     
     
     

@@ -7,8 +7,14 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Gestion des Consultants</title>
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{phasesProjetManager.phasesDuProjet()}"/>
+      </f:metadata>
+    
 
     </h:head>
+    
+
     <h:body style="padding-top: 60px">
         <h:outputScript library="holder" name="holder.js" />
         <!--script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.5.2/holder.min.js"></script-->
@@ -32,57 +38,43 @@
                     <b:listLinks>
                         <!--<b:navLink header="Dasboard Links" />-->
                         <b:navLink href="accueil.xhtml " value="Vue globale"/>
-                        <b:navLink href="#" value="Gestion des consultants" active="true"/>
+                        <b:navLink href="consultants.xhtml" value="Gestion des consultants"/>
                         <b:navLink href="ajoutConsultant.xhtml" value="Ajouter un consultant" />
-                        
+                        <b:navLink href="#" value="Export" />
                     </b:listLinks>
                     <b:listLinks>
-                        <b:navLink href="projets.xhtml" value="Gestion des projets" />
-                        <b:navLink href="#" value="Création d'un nouveau projet" />
-                       
+                        <b:navLink value="Nav item" />
+                        <b:navLink value="Nav item again" />
+                        <b:navLink value="One more nav" />
+                        <b:navLink value="Another nav item" />
+                        <b:navLink value="More navigation" />
                     </b:listLinks>
-                    
-                    
+                    <b:listLinks>
+                        <b:navLink value="Nav item again" />
+                        <b:navLink value="One more nav" />
+                        <b:navLink value="Another nav item" />
+                    </b:listLinks>
                 </b:column>
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
-                    <h1>Gestion des Consultants disponibles</h1>
-                    
+                    <h1>Phases du projet "#{phasesProjetManager.projetAConsult.libelleProjet}"</h1>
+                    <p> En cours à partir/depuis le: #{phasesProjetManager.projetAConsult.dateDebProjetPrevue} </p>
+
+                    <h:form>
+                        <b:dataTable value="#{phasesProjetManager.listphase}"
+                                     var="phase">
+                            <b:dataTableColumn value="#{phase.libellePhase}" label="Libellé phase" />
+                            <b:dataTableColumn value="#{phase.descriptionPhase}" label="Description phase"/>
+                            <b:dataTableColumn value="#{phase.dateDebutPhase}" label="Date de début" />
+                            <b:dataTableColumn value="#{phase.dateFinPhase}"  label="Date de fin"/>
+                            <b:dataTableColumn value="#{phase.unConsultant.nomConsultant}" label="Nom du Manager" />
+                            <b:dataTableColumn value="#{phase.unConsultant.prenomConsultant}" label="Prénom du Manager" />
+                            
+                        </b:dataTable>
+                    </h:form>
+
                     <hr/>
                     <h:form>
-                        <b:row styleClass="table-responsive">
-                            <h:dataTable styleClass="table table-striped" value="#{gestionConsultantManager.consultantList}" var="consultant" rows="15">
-                                <h:column>
-                                    <f:facet name="header"><h:outputText value="Identifiant du consultant" /></f:facet>
-                                    <h:outputText value="#{consultant.idConsultant}" />
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header"><h:outputText value="Prénom" /></f:facet>
-                                    <h:outputText value="#{consultant.prenomConsultant}" />
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header"><h:outputText value="Nom" /></f:facet>
-                                    <h:outputText value="#{consultant.nomConsultant}" />
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header"><h:outputText value="Adresse" /></f:facet>
-                                    <h:outputText value="#{consultant.adresseConsultant}" />
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header"><h:outputText value="Code Postal" /></f:facet>
-                                    <h:outputText value="#{consultant.cpConsultant}" />
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header"><h:outputText value="Ville" /></f:facet>
-                                    <h:outputText value="#{consultant.villeConsultant}" />
-                                </h:column>
-                                <h:column>
-                                    <b:commandButton value="Détails" look="info">
-                                      <!--  <f:setPropertyActionListener value="#{product}" target="#{shoppingCartManager.prodToAdd}"/>-->
-                                    <!--    <f:setPropertyActionListener value="#{product.idProduct}" target="#{shoppingCartManager.idProduct}"/>-->
-                                    </b:commandButton>
-                                </h:column>
-                            </h:dataTable>
-                        </b:row>
+
                     </h:form>
                 </b:column>
             </b:row>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -6,7 +6,7 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Gestion des Consultants</title>
+        <title>Gestion des projets</title>
 
     </h:head>
     <h:body style="padding-top: 60px">
@@ -32,17 +32,16 @@
                     <b:listLinks>
                         <!--<b:navLink header="Dasboard Links" />-->
                         <b:navLink href="accueil.xhtml " value="Vue globale"/>
-                        <b:navLink href="#" value="Gestion des consultants" active="true"/>
+                        <b:navLink href="consultants.xhtml" value="Gestion des consultants"/>
                         <b:navLink href="ajoutConsultant.xhtml" value="Ajouter un consultant" />
-                        
-                    </b:listLinks>
-                    <b:listLinks>
-                        <b:navLink href="projets.xhtml" value="Gestion des projets" />
-                        <b:navLink href="#" value="Création d'un nouveau projet" />
                        
                     </b:listLinks>
-                    
-                    
+                    <b:listLinks>
+                        <b:navLink href="projets.xhtml" value="Gestion des projets" active="true" />
+                        <b:navLink href="#" value="Ajouter un projet" />
+                        
+                    </b:listLinks>
+                 
                 </b:column>
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
                     <h1>Gestion des Consultants disponibles</h1>
@@ -50,35 +49,39 @@
                     <hr/>
                     <h:form>
                         <b:row styleClass="table-responsive">
-                            <h:dataTable styleClass="table table-striped" value="#{gestionConsultantManager.consultantList}" var="consultant" rows="15">
+                            <h:dataTable styleClass="table table-striped" value="#{gestionProjetManager.projectlist}" var="projet" rows="15">
                                 <h:column>
-                                    <f:facet name="header"><h:outputText value="Identifiant du consultant" /></f:facet>
-                                    <h:outputText value="#{consultant.idConsultant}" />
+                                    <f:facet name="header"><h:outputText value="Identifiant projet" /></f:facet>
+                                    <h:outputText value="#{projet.idProjet}" />
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header"><h:outputText value="Prénom" /></f:facet>
-                                    <h:outputText value="#{consultant.prenomConsultant}" />
+                                    <f:facet name="header"><h:outputText value="Libellé projet" /></f:facet>
+                                    <h:outputText value="#{projet.libelleProjet}" />
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header"><h:outputText value="Nom" /></f:facet>
-                                    <h:outputText value="#{consultant.nomConsultant}" />
+                                    <f:facet name="header"><h:outputText value="Date du début de projet prévue" /></f:facet>
+                                    <h:outputText value="#{projet.dateDebProjetPrevue}" />
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header"><h:outputText value="Adresse" /></f:facet>
-                                    <h:outputText value="#{consultant.adresseConsultant}" />
+                                    <f:facet name="header"><h:outputText value="Date du début de projet effective" /></f:facet>
+                                    <h:outputText value="#{projet.dateDebProjetEffective}" />
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header"><h:outputText value="Code Postal" /></f:facet>
-                                    <h:outputText value="#{consultant.cpConsultant}" />
+                                    <f:facet name="header"><h:outputText value="Date de fin de projet prévue" /></f:facet>
+                                    <h:outputText value="#{projet.dateFinProjetPrevue}" />
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header"><h:outputText value="Ville" /></f:facet>
-                                    <h:outputText value="#{consultant.villeConsultant}" />
+                                    <f:facet name="header"><h:outputText value="Date de fin de projet effective" /></f:facet>
+                                    <h:outputText value="#{projet.dateFinProjetEffective}" />
+                                </h:column>
+                                 <h:column>
+                                    <f:facet name="header"><h:outputText value="Description du projet" /></f:facet>
+                                    <h:outputText value="#{projet.descriptionProjet}" />
                                 </h:column>
                                 <h:column>
-                                    <b:commandButton value="Détails" look="info">
-                                      <!--  <f:setPropertyActionListener value="#{product}" target="#{shoppingCartManager.prodToAdd}"/>-->
-                                    <!--    <f:setPropertyActionListener value="#{product.idProduct}" target="#{shoppingCartManager.idProduct}"/>-->
+                                    <b:commandButton value="Phases du projet" look="info" action="#{phasesProjetManager.afficherPhases()}">
+                                        <f:setPropertyActionListener value="#{projet}" target="#{phasesProjetManager.projetAConsult}"/>
+                                   
                                     </b:commandButton>
                                 </h:column>
                             </h:dataTable>

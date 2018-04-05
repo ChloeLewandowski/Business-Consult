@@ -19,7 +19,7 @@ import model.Consultant;
  */
 @ApplicationScoped
 @ManagedBean
-public class GestionConsultantManager {
+public class GestionConsultantManager implements java.io.Serializable {
 
     private List<Consultant> consultantList;
     @EJB

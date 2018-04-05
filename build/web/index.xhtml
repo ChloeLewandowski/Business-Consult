@@ -20,18 +20,19 @@
         <b:container>
             <h:form styleClass="form-signin" prependId="false">
                 <h2 class="form-signin-heading">Connectez-vous pour accéder à votre compte</h2>
-                <b:inputText id="email" placeholder="Email address" >
+                <h:outputLabel  style="color:red;" value="#{loginManager.message}"/>
+                <b:inputText id="loginUser" placeholder="Login" value="#{loginManager.loginUser}">
                     <f:facet name="prepend">
                         <b:icon name="user" />
                     </f:facet>
                 </b:inputText>
-                <b:inputText id="password" placeholder="Password" type="password">
+                <b:inputText id="passwordUser" placeholder="Mot de passe" type="password" value="#{loginManager.passwordUser}">
                     <f:facet name="prepend">
                         <b:iconAwesome name="key" />
                     </f:facet>
                 </b:inputText>
                 <b:selectBooleanCheckbox value="true" caption="Se souvenir de moi"/>
-                <b:commandButton look="primary btn-block" action="#{loginManager.connexionOk()}" value="Log in" icon="log-in" size="lg"/>
+                <b:commandButton look="primary btn-block" action="#{loginManager.send()}" value="Log in" icon="log-in" size="lg"/>
             </h:form>
         </b:container>
     </h:body>

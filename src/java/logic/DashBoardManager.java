@@ -60,6 +60,11 @@ public class DashBoardManager implements Serializable {
         String s = "accueil.xhtml";
         return s;
     }
+    
+    public String afficherConsultants(){
+       
+        return "consultantsSelonCompetences.xhtml";
+    }
 
     //--------------------------------------------------------------------------------------------------
     //getters et setters

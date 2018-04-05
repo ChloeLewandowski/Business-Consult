@@ -29,4 +29,8 @@ public class CompetenceFacade extends AbstractFacade<Competence> {
         super(Competence.class);
     }
     
+    
+    
+    
+    
 }

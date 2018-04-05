@@ -17,26 +17,27 @@ import javax.persistence.Table;
  * @author Chloé Lewandowski
  */
 @Entity
-@Table(name="tb_utilisateur")
+@Table(name="tb_Utilisateur")
 public class User implements java.io.Serializable {
-    @Column(name="idUtil")
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer idUser;
     @Column(name="loginUtil")
     private String loginUser;
     @Column(name="passwordUtil")
     private String passwordUser;
-
-    public Integer getIdUser() {
-        return idUser;
+    
+    public User(){
+        
     }
 
-    public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
+
+    public String getLoginUser() {
+        return loginUser;
     }
 
-   
+    public void setLoginUser(String loginUser) {
+        this.loginUser = loginUser;
+    }
+    
 
     public String getPassword() {
         return passwordUser;
