@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.Collection;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,7 +29,7 @@ public class Client implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "IDCLT")
-    private String idClt;
+    private Integer idClt;
     @Column(name = "RAISONSOCCLT")
     private String raisonSocClt;
     @Column(name = "NOMRESPONSABLE")
@@ -46,8 +48,12 @@ public class Client implements java.io.Serializable {
     private String numTelSiege;
     @Column(name = "FAXSIEGE")
     private String faxSiege;
+    @OneToMany(mappedBy = "unClient")
+    private Collection<Facture> desFactures;
+    @OneToMany(mappedBy = "unClient")
+    private Collection<Projet> desProjets;
 
-    public Client(String idClt, String raisonSocClt, String nomResponsable, String prenomResponsable, String adresseSiege, String CpSiege, String villeSiege, String paysSiege, String numTelSiege, String faxSiege) {
+    public Client(Integer idClt, String raisonSocClt, String nomResponsable, String prenomResponsable, String adresseSiege, String CpSiege, String villeSiege, String paysSiege, String numTelSiege, String faxSiege) {
         this.idClt = idClt;
         this.raisonSocClt = raisonSocClt;
         this.nomResponsable = nomResponsable;
@@ -64,11 +70,11 @@ public class Client implements java.io.Serializable {
         
     }
     
-    public String getIdClt() {
+    public Integer getIdClt() {
         return idClt;
     }
 
-    public void setIdClt(String idClt) {
+    public void setIdClt(Integer idClt) {
         this.idClt = idClt;
     }
 
@@ -143,6 +149,24 @@ public class Client implements java.io.Serializable {
     public void setFaxSiege(String faxSiege) {
         this.faxSiege = faxSiege;
     }
+
+    public Collection<Facture> getDesFactures() {
+        return desFactures;
+    }
+
+    public void setDesFactures(Collection<Facture> desFactures) {
+        this.desFactures = desFactures;
+    }
+
+    public Collection<Projet> getDesProjets() {
+        return desProjets;
+    }
+
+    public void setDesProjets(Collection<Projet> desProjets) {
+        this.desProjets = desProjets;
+    }
+    
+    
     
     
 }

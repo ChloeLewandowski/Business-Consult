@@ -19,11 +19,11 @@ and open the template in the editor.
     <h:body style="padding-top: 60px">
         <h:outputScript library="holder" name="holder.js" />
         <!--script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.5.2/holder.min.js"></script-->
-        <b:navBar brand="Business Consult" brandHref="#" inverse="true" fixed="top" fluid="true">
+        <b:navBar brand="Business Consult" brandHref="#" inverse="true" fixed="top" fluid="true"> 
             <b:scrollUp distance="200" animation="fade" text=""  name="scrollUpCustom" />
             <b:navbarLinks pull="right">
                 <b:navLink value="Dashboard" href="#"></b:navLink>
-                <b:navLink value="Réglages" href="#"></b:navLink>
+                <b:navLink value="Se déconnecter" href="index.xhtml"></b:navLink>
                 <b:navLink value="Mon profil" href="#"></b:navLink>
                 <b:navLink value="Aide" href="#"></b:navLink>
             </b:navbarLinks>
@@ -43,29 +43,32 @@ and open the template in the editor.
                     </b:listLinks>
                     <b:listLinks>
                         <b:navLink href="projets.xhtml" value="Gestion des projets" />
-                        <b:navLink value="Création d'un nouveau projet" />
+                        <b:navLink href="ajoutProjet.xhtml" value="Création d'un nouveau projet" />
                     </b:listLinks>
                 
                 </b:column>
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
+                    
                     <h1>Tableau de bord</h1>
+                   
                     
                     <!--Displays skills categories--> 
                     <h2> Consultants par champ de compêtences </h2>
                     <hr/>
                     <b:form>
-                    <b:row styleClass="placeholders">
-                        <b:column col-xs="6" col-sm="3" styleClass="placeholder">
-                            <h:commandLink action="#{dashBoardManager.afficherConsultants()}"> 
-                            <h:graphicImage value="resources/images/team.jpg" class="img-responsive"/>
-                            <f:param name="codeCompetence" value="1"/>
-                            </h:commandLink>
-                            <h4>WebDesign</h4>
-                            <span class="text-muted">Développeurs front-end, webdesign,UI Specialists </span>
+                        <b:row styleClass="placeholders">
+                            <b:column col-xs="6" col-sm="3" styleClass="placeholder">
+                                <h:commandLink action="#{consultantsSelonCompetencesManager.parametersAction()}"> 
+                                    <f:param name="codeCompetence" value="dev"/>
+                                    <h:graphicImage value="resources/images/team.jpg" class="img-responsive"/>
+
+                                </h:commandLink>
+                                <h4>WebDesign</h4>
+                                <span class="text-muted">Développeurs front-end, webdesign,UI Specialists </span>
                         </b:column>
                   
                         <b:column col-xs="6" col-sm="3" styleClass="placeholder">
-                            <h:graphicImage value="resources/images/programming.png" class="img-responsive"/>
+                            <h:graphicImage value="resources/images/code.jpg" class="img-responsive"/>
                             <h4>Développement</h4>
                             <span class="text-muted">Développeurs web et logiciel,full-stack, back-end</span>
                         </b:column>

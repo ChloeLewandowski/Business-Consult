@@ -11,9 +11,12 @@ import java.util.Collection;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,9 +27,9 @@ import javax.persistence.Table;
 @ApplicationScoped
 @ManagedBean
 @Entity
-@Table(name="tb_Projet")
-public class Projet implements java.io.Serializable{
-    
+@Table(name = "tb_Projet")
+public class Projet implements java.io.Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int idProjet;
@@ -34,13 +37,16 @@ public class Projet implements java.io.Serializable{
     private Date dateDebProjetPrevue;
     private Date dateFinProjetPrevue;
     private Date dateDebProjetEffective;
-    private Date dateFinProjetEffective; 
+    private Date dateFinProjetEffective;
     private String descriptionProjet;
-    @OneToMany(mappedBy="unProjet")
+    @OneToMany(mappedBy = "unProjet")
     private Collection<Phase> desPhases;
-    
-    public Projet(){
-        
+    @JoinColumn(name = "idClt")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Client unClient;
+
+    public Projet() {
+
     }
 
     public int getIdProjet() {
@@ -91,8 +97,6 @@ public class Projet implements java.io.Serializable{
         this.dateFinProjetEffective = dateFinProjetEffective;
     }
 
-   
-
     public String getDescriptionProjet() {
         return descriptionProjet;
     }
@@ -108,13 +112,15 @@ public class Projet implements java.io.Serializable{
     public void setDesPhases(Collection<Phase> desPhases) {
         this.desPhases = desPhases;
     }
+
+    public Client getUnClient() {
+        return unClient;
+    }
+
+    public void setUnClient(Client unClient) {
+        this.unClient = unClient;
+    }
+    
     
 
 }
-    
-    
-    
-    
-    
-    
-

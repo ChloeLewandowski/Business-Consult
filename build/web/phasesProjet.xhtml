@@ -40,20 +40,14 @@
                         <b:navLink href="accueil.xhtml " value="Vue globale"/>
                         <b:navLink href="consultants.xhtml" value="Gestion des consultants"/>
                         <b:navLink href="ajoutConsultant.xhtml" value="Ajouter un consultant" />
-                        <b:navLink href="#" value="Export" />
+                       
                     </b:listLinks>
                     <b:listLinks>
-                        <b:navLink value="Nav item" />
-                        <b:navLink value="Nav item again" />
-                        <b:navLink value="One more nav" />
-                        <b:navLink value="Another nav item" />
-                        <b:navLink value="More navigation" />
+                        <b:navLink href="projets.xhtml" value="Gestion des projets" />
+                        <b:navLink href="#" value="Ajouter un projet" />
+                        
                     </b:listLinks>
-                    <b:listLinks>
-                        <b:navLink value="Nav item again" />
-                        <b:navLink value="One more nav" />
-                        <b:navLink value="Another nav item" />
-                    </b:listLinks>
+                   
                 </b:column>
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
                     <h1>Phases du projet "#{phasesProjetManager.projetAConsult.libelleProjet}"</h1>
@@ -68,12 +62,79 @@
                             <b:dataTableColumn value="#{phase.dateFinPhase}"  label="Date de fin"/>
                             <b:dataTableColumn value="#{phase.unConsultant.nomConsultant}" label="Nom du Manager" />
                             <b:dataTableColumn value="#{phase.unConsultant.prenomConsultant}" label="Prénom du Manager" />
-                            
+                            <b:dataTableColumn label="Modification">
+                                <b:commandButton value="Modifier " look="warning">
+                                    <f:setPropertyActionListener value="#{phase}" target=""/>     
+                                </b:commandButton>
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="Facturation">
+                                <b:commandButton value="Cloturer " look="info" action="#{creationFactureManager.creerFacture()}">
+                                    <f:setPropertyActionListener value="#{phase}" target="#{creationFactureManager.phaseSelec}"/>     
+                                </b:commandButton>
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="Suppression">
+                                <b:commandButton value="Supprimer " look="danger" action="#{phasesProjetManager.supprimerPhase()}">
+                                    <f:setPropertyActionListener value="#{phase}" target="#{phasesProjetManager.phaseSelec}"/>     
+                                </b:commandButton>
+                            </b:dataTableColumn>
                         </b:dataTable>
                     </h:form>
 
                     <hr/>
                     <h:form>
+                        <h2> <b:iconAwesome name="plus-circle"/> Ajouter une phase au projet</h2> 
+                        <b:row>                           
+                            <b:column>
+                                <b:inputText style="width: 250px;" label="Libellé phase"  label-style="width:150px" value="#{phasesProjetManager.libellePhase}"> 
+                                    <f:facet name='prepend'>
+                                        <b:iconAwesome name="file"/>
+                                    </f:facet>
+                                </b:inputText>
+                            </b:column>                           
+                        </b:row>
+                        <b:row>
+                            <b:column>
+                                <b:inputTextarea placeholder="Description phase" value="#{phasesProjetManager.descriptionPhase}"> 
+                                    <f:facet name='prepend'>
+                                        <b:iconAwesome name="ellipsis-h"/>
+                                    </f:facet>
+                                </b:inputTextarea>                                                             
+                            </b:column>   
+                        </b:row>
+                        <b:row>
+                            <b:column span="4">
+                                <b:datepicker label="Date de début de la phase"  value="#{phasesProjetManager.dateDebutPhase}" placeholder="date de début de la phase"/>                                                            
+                            </b:column>   
+                        </b:row>
+                        <b:row>
+                            <b:column span="4">
+                                <b:datepicker label="Date de fin de la phase" value="#{phasesProjetManager.dateFinPhase}" placeholder="date de fin de la phase"  />                                                            
+                            </b:column>   
+                        </b:row>
+                        <b:row>
+                            <b:column span="4">
+                                <b:selectOneMenu label="Consultant responsable de la phase" value="#{phasesProjetManager.consultMana}">
+                                    <f:selectItems value="#{phasesProjetManager.consultManas}" var="consultant" itemLabel="#{consultant.nomConsultant}"/>
+                            </b:selectOneMenu>
+                            </b:column>
+                        </b:row>
+
+                        <b:row>
+                        <br/>
+                        <br/>
+                        </b:row>
+                    
+                        <b:row>
+                            
+                           
+                            <b:column span='2'>
+                                <b:commandButton value="Ajouter" look='info' size="lg" icon="thumbs-up" action="#{phasesProjetManager.ajouterPhase()}"/>
+                            </b:column>
+                            <b:column span='2'>
+                                <b:commandButton value="Effacer les données" look='danger' size="lg" icon="thumbs-down" action="#{phasesProjetManager.effacerInfosSaisies()}"/>
+                            </b:column>
+                        </b:row>
+
 
                     </h:form>
                 </b:column>
@@ -104,6 +165,10 @@
                     top: 51px;
                     z-index: 1000;
                 }
+            }
+            
+            #j_idt38\3a j_idt39 > thead > tr > th.sorting_desc{
+                display:none;
             }
             .nav-list {
                 margin-bottom: 20px;

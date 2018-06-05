@@ -42,7 +42,7 @@ public class LoginManager implements java.io.Serializable{
         user = uf.getUser(getLoginUser(), getPasswordUser());
         if (user == null) {
             user = new User();
-            message="Erreur de connexion dude";
+            message="Erreur de connexion: veuillez vérifier votre identifiant et/ou votre mot de passe";
             //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Identifiants incorrect", " Vérifiez vos logins et réessayez"));
             return null;
         } else {

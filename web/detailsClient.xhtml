@@ -22,9 +22,9 @@ and open the template in the editor.
         <!--script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.5.2/holder.min.js"></script-->
         <b:navBar brand="Business Consult" brandHref="#" inverse="true" fixed="top" fluid="true">
             <b:scrollUp distance="200" animation="fade" text=""  name="scrollUpCustom" />
-            <b:navbarLinks pull="right">
+             <b:navbarLinks pull="right">
                 <b:navLink value="Dashboard" href="#"></b:navLink>
-                <b:navLink value="Réglages" href="#"></b:navLink>
+                <b:navLink value="Se déconnecter" href="index.xhtml"></b:navLink>
                 <b:navLink value="Mon profil" href="#"></b:navLink>
                 <b:navLink value="Aide" href="#"></b:navLink>
             </b:navbarLinks>
@@ -37,24 +37,16 @@ and open the template in the editor.
         <b:container fluid="true">
             <b:row>
                 <b:column col-sm="3" col-md="2" styleClass="sidebar">
-                    <b:listLinks>
-                        <b:navLink href="accueil.xhtml" value="Vue Globale" />
+                   <b:listLinks>
+                        <b:navLink href="#" value="Vue Globale" active="true"/>
                         <b:navLink href="consultants.xhtml" value="Gestion des consultants" />
                         <b:navLink href="ajoutConsultant.xhtml" value="Ajouter un consultant" />
-                        <b:navLink href="#" value="Export" />
                     </b:listLinks>
                     <b:listLinks>
-                        <b:navLink value="Nav item" />
-                        <b:navLink value="Nav item again" />
-                        <b:navLink value="One more nav" />
-                        <b:navLink value="Another nav item" />
-                        <b:navLink value="More navigation" />
+                        <b:navLink href="projets.xhtml" value="Gestion des projets" />
+                        <b:navLink value="Création d'un nouveau projet" />
                     </b:listLinks>
-                    <b:listLinks>
-                        <b:navLink value="Nav item again" />
-                        <b:navLink value="One more nav" />
-                        <b:navLink value="Another nav item" />
-                    </b:listLinks>
+                    
                 </b:column>
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
                     <h1>Détails client</h1>

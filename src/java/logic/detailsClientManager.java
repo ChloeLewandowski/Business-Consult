@@ -17,7 +17,7 @@ import model.Client;
  */
 @ApplicationScoped
 @ManagedBean
-public class detailsClientManager implements java.io.Serializable {
+public class DetailsClientManager implements java.io.Serializable {
     
     private Integer idClient;
     private String raisonSocClt;

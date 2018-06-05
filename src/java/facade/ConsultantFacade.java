@@ -30,6 +30,7 @@ public class ConsultantFacade extends AbstractFacade<Consultant> {
         super(Consultant.class);
     }
     
+    //ajout d'un consultant en base 
      public void insertConsultant(String prenom,String nom,String adresse, String cp, String ville){
     Query query = em.createNativeQuery("INSERT INTO TB_CONSULTANT (PRENOMCONSULTANT, NOMCONSULTANT, ADRESSECONSULTANT, CPCONSULTANT,VILLECONSULTANT) " +
             " VALUES(?,?,?,?,?)");

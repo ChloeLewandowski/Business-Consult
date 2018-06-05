@@ -6,11 +6,13 @@
 package logic;
 
 import facade.CompetenceFacade;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 import model.Competence;
 
 /**
@@ -23,22 +25,24 @@ public class ConsultantsSelonCompetencesManager implements java.io.Serializable 
     
     @ManagedProperty("#{param.codeCompetence}")
     private String codeCompetence;
-    @EJB
-    private CompetenceFacade cf= new CompetenceFacade();
+ 
     private Competence c= new Competence();
     private String descriptionCompetence;
     private String libelleCompetence;
     
      
-   
-    public void recupererCompetence(){
+   public String parametersAction(){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+        codeCompetence = params.get("codeCompetence");
         
-    c=cf.find(codeCompetence);
-    
+        return "consultantsSelinCompetences.xhtml";
+    }
+  
     
        
     
-    }
+    
 //-------------------------------------------------------------------------------
     //getters and setters
 
@@ -66,15 +70,6 @@ public class ConsultantsSelonCompetencesManager implements java.io.Serializable 
         this.descriptionCompetence = descriptionCompetence;
     }
 
-    public String getLibelleCompetence() {
-        return libelleCompetence;
-    }
-
-    public void setLibelleCompetence(String libelleCompetence) {
-        this.libelleCompetence = libelleCompetence;
-    }
-    
-    
     
   
 }

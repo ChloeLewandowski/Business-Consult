@@ -5,6 +5,7 @@
  */
 package facade;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -45,5 +46,38 @@ public class PhaseFacade extends AbstractFacade<Phase> {
             return null;
         }
     }
-
+    
+      public void insertPhase(String libelle,String description,Date dateDebut, Date dateFin, Integer idconsultant, Integer idprojet){
+    Query query = em.createNativeQuery("INSERT INTO TB_PHASE (LIBELLEPHASE, DESCRIPTIONPHASE, DATEDEBUTPHASE, DATEFINPHASE,IDCONSULTANT,IDPROJET) " +
+            " VALUES(?,?,?,?,?,?)");
+        query.setParameter(1, libelle);
+        query.setParameter(2, description);
+        query.setParameter(3, dateDebut);
+        query.setParameter(4, dateFin);
+        query.setParameter(5, idconsultant);
+        query.setParameter(6, idprojet);
+        query.executeUpdate();
+    }
+      
+    public Integer rechercheSiFactureExiste(Integer idPhase) {
+        Integer numFacture=0;
+        Query q = em.createNativeQuery("SELECT numFacture FROM TB_PHASESFACTUREES WHERE CODEPHASE=?");
+        q.setParameter(1, idPhase);
+        if (q.getResultList().size() > 0) {
+            List<Integer> results = q.getResultList();
+             numFacture = results.get(0);
+        }
+        return numFacture;   
+    }
+    
+    public void associeNouvelleFacture(Integer numFacture, Integer codePhase){
+        
+         Query q = em.createNativeQuery("INSERT INTO TB_PHASESFACTUREES(NUMFACTURE, CODEPHASE) VALUES (?,?)");
+         q.setParameter(1, numFacture);
+         q.setParameter(2, codePhase);
+         q.executeUpdate();
+                 
+             
+        
+    }
 }

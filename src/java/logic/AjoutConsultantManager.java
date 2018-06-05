@@ -27,6 +27,7 @@ public class AjoutConsultantManager implements java.io.Serializable {
      @EJB
     private ConsultantFacade cf= new ConsultantFacade(); 
 
+    //ajout d'un consultant via le formulaire
     public String addConsultant() {
         String prenom=getPrenomConsultant();
         String nom=getNomConsultant();

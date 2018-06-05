@@ -6,6 +6,7 @@
 package logic;
 
 import facade.ProjetFacade;
+import java.sql.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -22,8 +23,14 @@ import model.Projet;
 public class GestionProjetManager implements java.io.Serializable{
     
  private List <Projet> projectlist;
+ private Projet projToDelete;
+ @EJB
+ ProjetFacade pf= new ProjetFacade();
+
+ 
  @EJB
  private ProjetFacade pj= new ProjetFacade();
+ 
 
  
  @PostConstruct
@@ -31,6 +38,14 @@ public class GestionProjetManager implements java.io.Serializable{
      
      projectlist=pj.findAll();
      
+ }
+ 
+ public String deleteProjet(){
+     Projet proj=getProjToDelete();
+     pf.remove(proj);
+     projectlist.remove(proj);
+     String s="projets.xhtml";
+     return s;
  }
  
 
@@ -43,6 +58,15 @@ public class GestionProjetManager implements java.io.Serializable{
         this.projectlist = projectlist;
     }
 
+    public Projet getProjToDelete() {
+        return projToDelete;
+    }
+
+    public void setProjToDelete(Projet projToDelete) {
+        this.projToDelete = projToDelete;
+    }
+
+    
 
     
  

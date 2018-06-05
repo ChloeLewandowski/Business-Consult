@@ -5,9 +5,11 @@
  */
 package facade;
 
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import model.Projet;
 
 /**
@@ -29,4 +31,22 @@ public class ProjetFacade extends AbstractFacade<Projet> {
         super(Projet.class);
     }
     
+    //ajout d'un projet en base
+   public Boolean insertProjet(String libelleProjet,Date dateDebProjP,Date dateFinProjP, Date dateDebProjE, Date dateFinProjE, String descriptionProjet, Integer idClt){
+    try{Query query = em.createNativeQuery("INSERT INTO TB_PROJET (LIBELLEPROJET, DATEDEBPROJETPREVUE, DATEFINPROJETPREVUE, DATEDEBPROJETEFFECTIVE,DATEFINPROJETEFFECTIVE,DESCRIPTIONPROJET,IDCLT) " +
+            " VALUES(?,?,?,?,?,?,?)");
+        query.setParameter(1, libelleProjet);
+        query.setParameter(2, dateDebProjP);
+        query.setParameter(3, dateFinProjP);
+        query.setParameter(4, dateDebProjE);
+        query.setParameter(5, dateFinProjE);
+        query.setParameter(6, descriptionProjet);
+        query.setParameter(7, idClt);
+        
+        query.executeUpdate();
+        return true;
+    }finally{
+     return false;   
+    }
+    }
 }

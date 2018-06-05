@@ -61,11 +61,15 @@ public class DashBoardManager implements Serializable {
         return s;
     }
     
+    public String logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "index.xhtml";
+    }
+    
     public String afficherConsultants(){
        
         return "consultantsSelonCompetences.xhtml";
     }
-
     //--------------------------------------------------------------------------------------------------
     //getters et setters
     public List<Client> getListeClt() {

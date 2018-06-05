@@ -38,16 +38,18 @@
                     </b:listLinks>
                     <b:listLinks>
                         <b:navLink href="projets.xhtml" value="Gestion des projets" active="true" />
-                        <b:navLink href="#" value="Ajouter un projet" />
+                        <b:navLink href="ajoutProjet.xhtml" value="Ajouter un projet" />
                         
                     </b:listLinks>
                  
                 </b:column>
                 <b:column col-sm="9" offset-sm="3" col-md="10" offset="2" styleClass="main">
-                    <h1>Gestion des Consultants disponibles</h1>
+                    <h1>Gestion des projets</h1>
                     
                     <hr/>
                     <h:form>
+                        
+
                         <b:row styleClass="table-responsive">
                             <h:dataTable styleClass="table table-striped" value="#{gestionProjetManager.projectlist}" var="projet" rows="15">
                                 <h:column>
@@ -74,14 +76,20 @@
                                     <f:facet name="header"><h:outputText value="Date de fin de projet effective" /></f:facet>
                                     <h:outputText value="#{projet.dateFinProjetEffective}" />
                                 </h:column>
-                                 <h:column>
+                                <h:column>
                                     <f:facet name="header"><h:outputText value="Description du projet" /></f:facet>
                                     <h:outputText value="#{projet.descriptionProjet}" />
                                 </h:column>
                                 <h:column>
                                     <b:commandButton value="Phases du projet" look="info" action="#{phasesProjetManager.afficherPhases()}">
                                         <f:setPropertyActionListener value="#{projet}" target="#{phasesProjetManager.projetAConsult}"/>
-                                   
+
+                                    </b:commandButton>
+                                </h:column>
+                                <h:column>
+                                    <b:commandButton value="Supprimer le projet" look="danger" action="#{gestionProjetManager.deleteProjet()}">
+                                        <f:setPropertyActionListener value="#{projet}" target="#{gestionProjetManager.projToDelete}"/>
+
                                     </b:commandButton>
                                 </h:column>
                             </h:dataTable>

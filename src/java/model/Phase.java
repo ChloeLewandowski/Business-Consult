@@ -8,7 +8,7 @@ package model;
 
 
 
-import java.sql.Date;
+import java.util.Date;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.Entity;
