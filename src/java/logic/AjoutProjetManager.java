@@ -36,6 +36,7 @@ public class AjoutProjetManager {
     private Date dateDebProjetEffective;
     private Date dateFinProjetEffective;
     private String descriptionProjet;
+    private String messageErreur; 
 
     @PostConstruct
     public void initPrjTab() {
@@ -43,22 +44,28 @@ public class AjoutProjetManager {
         listClient = cf.findAll();
 
     }
-    
-    public String ajoutProjet(){
-        String libelle=getLibelleProjet();
-        Date dateDebP=getDateDebProjetPrevue();
-        Date dateFinP=getDateFinProjetPrevue();
-        Date dateDebE=getDateDebProjetEffective();
-        Date dateFinE=getDateFinProjetEffective();
-        String desc= getDescriptionProjet();
-        Client clt=getCltProjet();
-        Integer id=clt.getIdClt();
-        pf.insertProjet(libelle, dateDebP, dateFinP, dateDebE, dateFinE, desc, id);
-        String s="projets.xhtml";
+
+    public String ajoutProjet() {
+        String s;
+        //on vérifie que les dates saisies par l'utilisateurs soient cohérentes
+        if ((getDateFinProjetEffective().getTime() < getDateDebProjetEffective().getTime()) || 
+                (getDateFinProjetPrevue().getTime() < getDateDebProjetPrevue().getTime())) {
+            messageErreur = "Vos saisies de dates sont incorrectes, veuillez vérifier leur cohérence "
+                    + " (pas de date de fin supérieure à une date de début)";
+            //on lui affiche toujours la même vue
+            s = "ajoutProjet.xhtml";
+        } else {
+            //on insère le projet en base
+            pf.insertProjet(getLibelleProjet(), getDateDebProjetPrevue(), getDateFinProjetPrevue(),
+                    getDateDebProjetEffective(), getDateFinProjetEffective(), getDescriptionProjet(),
+                    getCltProjet().getIdClt());
+            //on redirige l'utilisateur vers la liste des projets du cabinet
+            s = "projets.xhtml";
+
+        }
         return s;
-        
     }
-    
+
     public void effacerInfosSaisies(){
         setLibelleProjet(null);
         setDescriptionProjet(null);
@@ -134,6 +141,15 @@ public class AjoutProjetManager {
     public void setDescriptionProjet(String descriptionProjet) {
         this.descriptionProjet = descriptionProjet;
     }
+
+    public String getMessageErreur() {
+        return messageErreur;
+    }
+
+    public void setMessageErreur(String messageErreur) {
+        this.messageErreur = messageErreur;
+    }
+    
     
     
     

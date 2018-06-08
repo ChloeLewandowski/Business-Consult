@@ -33,7 +33,6 @@ public class GestionProjetManager implements java.io.Serializable{
  
 
  
- @PostConstruct
  public void initPrjTab(){
      
      projectlist=pj.findAll();

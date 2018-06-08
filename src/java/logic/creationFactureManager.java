@@ -18,6 +18,7 @@ import javax.faces.bean.ManagedBean;
 import model.Client;
 import model.Facture;
 import model.Phase;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 /**
  *
@@ -76,6 +77,12 @@ public class creationFactureManager implements java.io.Serializable {
          return s;
 
     }
+     
+     public void genererPDF(){
+         JRBeanCollectionDataSource jbx;
+         
+     }
+     
 
     public Phase getPhaseSelec() {
         return phaseSelec;

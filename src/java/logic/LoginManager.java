@@ -27,7 +27,6 @@ public class LoginManager implements java.io.Serializable{
     private User user;
     private String loginUser; 
     private String passwordUser;
-    private String submessage;
     private String message;
     @EJB
     UserFacade uf= new UserFacade();
@@ -38,15 +37,15 @@ public class LoginManager implements java.io.Serializable{
    
 
     public String send() {
-        
+        //vérifie l'existance de l'utilisateur en base
         user = uf.getUser(getLoginUser(), getPasswordUser());
+        //si l'utilisateur n'existe pas on affiche un message d'erreur
         if (user == null) {
-            user = new User();
             message="Erreur de connexion: veuillez vérifier votre identifiant et/ou votre mot de passe";
-            //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Identifiants incorrect", " Vérifiez vos logins et réessayez"));
             return null;
+        //l'utilisateur existe, on accède à la prochaine vue de l'application    
         } else {
-            return "accueil";
+            return "accueil.xhtml";
         }
     }
 

@@ -28,7 +28,9 @@ public class UserFacade extends AbstractFacade<User> {
 
     public User getUser(String nameUser, String password) {
         try {
-            User u = (User) em.createQuery("SELECT u from User u where u.loginUser = :name and u.passwordUser = :password").setParameter("name", nameUser).setParameter("password", password).getSingleResult();
+            User u = (User) em.createQuery("SELECT u from User u where"
+                    + " u.loginUser = :name and u.passwordUser "
+                    + "= :password").setParameter("name", nameUser).setParameter("password", password).getSingleResult();
             return u;
         } catch (NoResultException e) {
             return null;

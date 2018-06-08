@@ -12,7 +12,7 @@ and open the template in the editor.
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Business Consult</title>
+        <title>Ajout de projets</title>
 
 
     </h:head>
@@ -57,20 +57,22 @@ and open the template in the editor.
                          <b:column>
                              <b:row>
                                  <h3> Informations de base sur le projet</h3>
-                                 <hr></hr>
+                             <hr/>
                                  <b:inputText style="width: 250px;" label="Libellé du projet" placeholder="Libellé Projet" value="#{ajoutProjetManager.libelleProjet}"> 
                                     <f:facet name='prepend'>
                                         <b:iconAwesome name="archive"/>
                                     </f:facet>
                                 </b:inputText>  
-                                  </b:row>
-                                <b:row>
-                           
-                                    <b:selectOneMenu style="width: 250px;" label="Client en demande du projet" value="#{ajoutProjetManager.cltProjet}">
-                                    <f:selectItems value="#{ajoutProjetManager.listClient}" var="client" itemLabel="#{client.prenomResponsable} #{client.nomResponsable}"/>
-                            </b:selectOneMenu>
-                            
-                        </b:row>
+                             </b:row>
+                             <b:row>
+
+                                 <b:selectOneMenu style="width: 250px;" 
+                                                  label="Client en demande du projet" value="#{ajoutProjetManager.cltProjet}">
+                                     <f:selectItems value="#{ajoutProjetManager.listClient}" 
+                                                    var="client" itemLabel="#{client.prenomResponsable} #{client.nomResponsable}"/>
+                                 </b:selectOneMenu>
+
+                             </b:row>
                              
                              <b:row>
                                  <b:inputTextarea label="Description du projet" placeholder="Description projet" value="#{ajoutProjetManager.descriptionProjet}"> 
@@ -81,12 +83,14 @@ and open the template in the editor.
                              </b:row>
                             </b:column>   
                         <br></br>
+                        <h:outputLabel  style="color:red;" value="#{ajoutProjetManager.messageErreur}"/>
                        <h3>Dates estimées</h3>
                         <hr>
                         </hr> 
                         <b:row>
                             <b:column span="4">
-                                <b:datepicker label="Date de début prévue"  value="#{ajoutProjetManager.dateDebProjetPrevue}" placeholder="date de début de la phase"/>                                                            
+                                <b:datepicker label="Date de début prévue"  
+                                              value="#{ajoutProjetManager.dateDebProjetPrevue}" placeholder="date de début de la phase"/>                                                            
                             </b:column>   
                         
                             <b:column span="4">
@@ -104,8 +108,8 @@ and open the template in the editor.
                             <b:column span="4">
                                 <b:datepicker label="Date de fin effective" value="#{ajoutProjetManager.dateFinProjetEffective}" placeholder="date de fin de la phase"  />                                                            
                             </b:column>   
-                        </b:row>
-                        
+                         </b:row><br/>
+                        <b:column span ='2'></b:column>
                          <b:column span='2'>
                              <b:commandButton value="Ajouter" look='info' size="lg" icon="thumbs-up" action="#{ajoutProjetManager.ajoutProjet()}"/>
                             </b:column>

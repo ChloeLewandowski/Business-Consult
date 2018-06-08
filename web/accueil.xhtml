@@ -12,9 +12,10 @@ and open the template in the editor.
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Business Consult</title>
-
-
+        <title>Business Consulting</title>
+<f:metadata>
+    <f:event type="preRenderView" listener="#{dashBoardManager.initTabs()}" />
+</f:metadata>
     </h:head>
     <h:body style="padding-top: 60px">
         <h:outputScript library="holder" name="holder.js" />
@@ -86,18 +87,26 @@ and open the template in the editor.
                      </b:form>
                     
                   <!--Displays current projects-->
-                    <h2> Projets en cours </h2>
-                    <hr/>
+                  <h2> Aperçu des projets </h2>
+                  <hr/>
 
-                    <h:form>
-                        <b:dataTable value="#{dashBoardManager.listeProjet}"
-                                     var="projet">
-                            <b:dataTableColumn value="#{projet.libelleProjet}" />
-                            <b:dataTableColumn value="#{projet.descriptionProjet}" />
-                            <b:dataTableColumn value="#{projet.dateDebProjetEffective}" />
-                            <b:dataTableColumn value="#{projet.dateFinProjetEffective}"  order="asc"/>
-                            <b:dataTableColumn value="#{projet.dateDebProjetPrevue}" label="Date prévue de début"/>
-                            <b:dataTableColumn value="#{projet.dateFinProjetPrevue}" label="Date prévue de fin" />
+                  <h:form>
+                      <h3> Nombre de projets du cabinet: #{dashBoardManager.listeProjet.size()}</h3>
+                      <h3> Nombre de projets terminés: #{dashBoardManager.projetsFinis}</h3><hr/>
+                      <h4> Pourcentage de projets achevés:</h4>
+                      <b:row>
+                          <b:progressBar value="#{dashBoardManager.tauxProjFinis.toString()}" min="0" max="100" 
+                                         tooltip="large-screen='full-width'" large-screen="full-width" look="info" animated="true"/>
+                      </b:row>
+                      <hr/>
+                      <b:dataTable value="#{dashBoardManager.listeProjet}"
+                                   var="projet">
+                          <b:dataTableColumn value="#{projet.libelleProjet}" label="Libellé"/>
+                          <b:dataTableColumn value="#{projet.descriptionProjet}" label="Description"/>
+                          <b:dataTableColumn value="#{projet.dateDebProjetEffective}" label="Date réelle de début"/>
+                          <b:dataTableColumn value="#{projet.dateFinProjetEffective}" label="Date réelle de fin"/>
+                          <b:dataTableColumn value="#{projet.dateDebProjetPrevue}" label="Date prévue de début"/>
+                          <b:dataTableColumn value="#{projet.dateFinProjetPrevue}" label="Date prévue de fin" />
                         </b:dataTable>
                     </h:form>
                     
@@ -129,7 +138,7 @@ and open the template in the editor.
                                 </h:column>
                                 <h:column>
 
-                                    <b:commandButton value="Voir les projets " look="info" action="#{detailsClientManager.afficherDetails()}">
+                                    <b:commandButton value="Plus de détails... " look="info" action="#{detailsClientManager.afficherDetails()}">
                                         <f:setPropertyActionListener value="#{client}" target="#{detailsClientManager.clientToDisp}"/>     
                                     </b:commandButton>
 

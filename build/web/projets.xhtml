@@ -7,7 +7,9 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>Gestion des projets</title>
-
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{gestionProjetManager.initPrjTab()}" />
+        </f:metadata>
     </h:head>
     <h:body style="padding-top: 60px">
         <h:outputScript library="holder" name="holder.js" />
